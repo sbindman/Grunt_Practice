@@ -1,0 +1,1 @@
+function talk(){console.log("talk")}function respond(){console.log("hello")}var file1="file1",new_var="hello",new_var2=99,apple="apple",file2variable=!1;
