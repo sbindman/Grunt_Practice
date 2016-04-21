@@ -1,21 +1,33 @@
 module.exports = function(grunt) {
+    //CREATING CUSTOM TASKS IN GRUNT
 
+    //create a new task called testing
     grunt.registerTask('testing', function () {
-
-        console.log("testing:");
+        //when grunt testing is run, console log "Running the testing task
+        console.log("Running the testing task.");
 
     });
 
-    grunt.registerTask('123', function () {
-        //fired with task is called
+    //create a new task called count
+    grunt.registerTask('count', function () {
+        //when grunt count is run, console log "1,2,3...."
         console.log("1,2,3....");
 
     });
 
-    grunt.registerTask('both', ['testing', '123']);
+    //when grunt test-count is run, run testing and count tasks
+    grunt.registerTask('test-count', ['testing', 'count']);
 
 
+    //USING COMMON GRUNT PLUGINS
+    //concat
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    //watch
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    //uglify
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
+    //configuration for grunt plugins
     grunt.initConfig({
         /*  these are all of the configs for the concat taskrunner.
          * 2 js files are being combined and 2 css files are being combined
@@ -51,20 +63,23 @@ module.exports = function(grunt) {
          */
         watch: {
             js: {
+                //if any of these files change
                 files: ['js/**/*.js'],
+                //run these tasks
                 tasks: ['concat:js', 'uglify:js']
             },
             css: {
+                //if any of these files change
                 files: ['css/**/*.css'],
+                //run these tasks
                 tasks: ['concat:css']
-            },
-        },
+            }
+        }
     });
 
+    grunt.registerTask('watch-js', ['watch:js']);
 
 
 
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
+
 }
